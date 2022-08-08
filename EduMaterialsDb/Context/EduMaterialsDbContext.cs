@@ -1,4 +1,5 @@
 ﻿using EduMaterialsDb.Models.Entities;
+using EduMaterialsDb.Utils;
 using Microsoft.EntityFrameworkCore;
 
 namespace EduMaterialsDb.Context
@@ -12,6 +13,15 @@ namespace EduMaterialsDb.Context
 
       public EduMaterialsDbContext(DbContextOptions<EduMaterialsDbContext> options) : base(options)
       {
+      }
+
+      protected override void OnModelCreating(ModelBuilder modelBuilder)
+      {
+         modelBuilder.Entity<EduMaterial>(builder =>
+         {
+            builder.Property(em => em.PublishDay)
+               .HasConversion<DateOnlyConverter, DateOnlyComparer>();
+         });
       }
    }
 }
