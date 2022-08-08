@@ -1,5 +1,6 @@
 ﻿using AuthDb.Context;
 using EduMaterialsDb.Context;
+using EduMaterialsDb.DAL;
 using Microsoft.EntityFrameworkCore;
 
 namespace API
@@ -14,7 +15,7 @@ namespace API
 
       public static void AddCustomServices(this IServiceCollection services)
       {
-         
+         services.AddScoped<IUnitOfWork, UnitOfWork>();
       }
    }
 }
