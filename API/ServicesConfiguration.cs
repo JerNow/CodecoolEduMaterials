@@ -2,6 +2,8 @@
 using EduMaterialsDb.Context;
 using EduMaterialsDb.DAL;
 using Microsoft.EntityFrameworkCore;
+using Services.Services.Controllers;
+using Services.Services.Interfaces;
 
 namespace API
 {
@@ -16,6 +18,8 @@ namespace API
       public static void AddCustomServices(this IServiceCollection services)
       {
          services.AddScoped<IUnitOfWork, UnitOfWork>();
+         services.AddScoped<IAuthorService, AuthorService>();
+         services.AddScoped<IEduMaterialService, EduMaterialService>();
       }
    }
 }

@@ -1,6 +1,7 @@
 ﻿using EduMaterialsDb.DAL;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Services.Services.Interfaces;
 
 namespace API.Controllers
 {
@@ -8,18 +9,17 @@ namespace API.Controllers
    [ApiController]
    public class AuthorsController : ControllerBase
    {
-      private readonly IUnitOfWork _unitOfWork;
+      private readonly IAuthorService _authorService;
 
-      public AuthorsController(IUnitOfWork unitOfWork)
+      public AuthorsController(IAuthorService authorService)
       {
-         _unitOfWork = unitOfWork;
+         _authorService = authorService;
       }
 
       [HttpGet]
       public async Task<IActionResult> GetAllAuthorsAsync()
       {
-         var authors = await _unitOfWork.Authors.GetAllAsync();
-         return Ok(authors);
+         return Ok(await _authorService.GetAll());
       }
    }
 }
