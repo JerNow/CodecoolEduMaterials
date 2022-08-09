@@ -4,6 +4,7 @@ using EduMaterialsDb.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EduMaterialsDb.Migrations
 {
     [DbContext(typeof(EduMaterialsDbContext))]
-    partial class EduMaterialsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220809214514_UpdateValidation")]
+    partial class UpdateValidation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
