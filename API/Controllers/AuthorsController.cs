@@ -21,5 +21,11 @@ namespace API.Controllers
       {
          return Ok(await _authorService.GetAll());
       }
+
+      [HttpGet("{AuthorName}/MaterialsWithReviewsAboveAverage")]
+      public async Task<IActionResult> GetReviewsAboveAverage(string authorName)
+      {
+         return Ok(await _authorService.GetReviewsAboveAverageFromAuthor(a => a.Name == authorName));
+      }
    }
 }
