@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using EduMaterialsDb.DAL;
 using EduMaterialsDb.Models.Entities;
+using Microsoft.AspNetCore.JsonPatch;
 using Services.Models.DTOs.EduMaterial;
 using Services.Services.Interfaces;
 using System.Linq.Expressions;
@@ -44,6 +45,27 @@ namespace Services.Services.Controllers
             throw new ArgumentNullException($"Educational material not found");
 
          await _unitOfWork.EduMaterials.DeleteAsync(eduMaterialToDelete);
+         await _unitOfWork.CompleteUnitOfWorkAsync();
+      }
+
+      public async Task PutAsync(Expression<Func<EduMaterial, bool>> condition, EduMaterialUpdateDto eduMaterialUpdateDto)
+      {
+         var eduMaterialToUpdate = await _unitOfWork.EduMaterials.GetSingleAsync(condition);
+         if (eduMaterialToUpdate is null)
+            throw new ArgumentNullException($"Educational material not found");
+
+         _mapper.Map(eduMaterialUpdateDto, eduMaterialToUpdate);
+
+         await _unitOfWork.EduMaterials.EditAsync(eduMaterialToUpdate);
+      }
+
+      public async Task PatchAsync(Expression<Func<EduMaterial, bool>> condition, JsonPatchDocument eduMaterialPatch)
+      {
+         var eduMaterialToUpdate = await _unitOfWork.EduMaterials.GetSingleAsync(condition);
+         if (eduMaterialToUpdate is null)
+            throw new ArgumentNullException($"Educational material not found");
+
+         eduMaterialPatch.ApplyTo(eduMaterialToUpdate);
          await _unitOfWork.CompleteUnitOfWorkAsync();
       }
    }

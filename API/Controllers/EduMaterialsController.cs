@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.AspNetCore.Mvc;
 using Services.Models.DTOs.EduMaterial;
 using Services.Services.Interfaces;
 
@@ -31,9 +32,23 @@ namespace API.Controllers
       }
 
       [HttpDelete("{id}")]
-      public async Task<IActionResult> DeleteEdumaterial(int id)
+      public async Task<IActionResult> DeleteEduMaterial(int id)
       {
          await _eduMaterialService.DeleteAsync(em => em.EduMaterialId == id);
+         return NoContent();
+      }
+
+      [HttpPut("{id}")]
+      public async Task<IActionResult> PutEduMaterial(int id, EduMaterialUpdateDto eduMaterialUpdateDto)
+      {
+         await _eduMaterialService.PutAsync(em => em.EduMaterialId == id, eduMaterialUpdateDto);
+         return NoContent();
+      }
+      
+      [HttpPatch("{id}")]
+      public async Task<IActionResult> PatchEduMaterial(int id, JsonPatchDocument eduMaterialPatch)
+      {
+         await _eduMaterialService.PutAsync(em => em.EduMaterialId == id, eduMaterialUpdateDto);
          return NoContent();
       }
    }

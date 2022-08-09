@@ -10,5 +10,6 @@ namespace Services.Services.Interfaces
       public Task<EduMaterialReadDto> GetSingleAsync(Expression<Func<EduMaterial, bool>> condition);
       public Task<EduMaterialReadDto> CreateNewAsync(EduMaterialCreateDto eduMaterialCreateDto);
       public Task DeleteAsync(Expression<Func<EduMaterial, bool>> condition);
+      public Task PutAsync(Expression<Func<EduMaterial, bool>> condition);
    }
 }
