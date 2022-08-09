@@ -19,6 +19,7 @@ builder.Services.AddCustomAuthentication(builder);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddCustomSwagger();
+builder.Services.AddCustomCors();
 
 var app = builder.Build();
 
@@ -30,6 +31,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors();
 
 app.UseAuthentication();
 app.UseAuthorization();

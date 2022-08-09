@@ -20,6 +20,16 @@ namespace API
          services.AddDbContext<EduMaterialsDbContext>(options => options.UseSqlServer(builder.Configuration["EduMaterialsDb"]));
       }
 
+      public static void AddCustomCors(this IServiceCollection services)
+      {
+         services.AddCors(o => o.AddDefaultPolicy(builder =>
+         {
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+         }));
+      }
+
       public static void AddCustomAuthentication(this IServiceCollection services, WebApplicationBuilder builder)
       {
          services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
