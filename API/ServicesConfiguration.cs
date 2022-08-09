@@ -14,13 +14,13 @@ namespace API
 {
    public static class ServicesConfiguration
    {
-      public static void AddCustomDbContext(this IServiceCollection services, IConfiguration configuration)
+      public static void AddCustomDbContext(this IServiceCollection services, WebApplicationBuilder builder)
       {
-         services.AddDbContext<AuthDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("AuthDb")));
-         services.AddDbContext<EduMaterialsDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("EduMaterialsDb")));
+         services.AddDbContext<AuthDbContext>(options => options.UseSqlServer(builder.Configuration["AuthDb"]));
+         services.AddDbContext<EduMaterialsDbContext>(options => options.UseSqlServer(builder.Configuration["EduMaterialsDb"]));
       }
 
-      public static void AddCustomAuthentication(this IServiceCollection services, IConfiguration configuration)
+      public static void AddCustomAuthentication(this IServiceCollection services, WebApplicationBuilder builder)
       {
          services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
          {
@@ -30,9 +30,9 @@ namespace API
             {
                ValidateIssuer = true,
                ValidateAudience = true,
-               ValidAudience = configuration["Jwt:Audience"],
-               ValidIssuer = configuration["Jwt:Issuer"],
-               IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]))
+               ValidAudience = builder.Configuration["Jwt:Audience"],
+               ValidIssuer = builder.Configuration["Jwt:Issuer"],
+               IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtKey"]))
             };
          });
       }

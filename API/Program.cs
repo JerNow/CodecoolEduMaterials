@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddCustomDbContext(builder.Configuration);
+builder.Services.AddCustomDbContext(builder);
 builder.Services.AddCustomServices();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddControllers().AddJsonOptions(j =>
@@ -14,7 +14,7 @@ builder.Services.AddControllers().AddJsonOptions(j =>
                                              })
                                  .AddNewtonsoftJson();
 builder.Services.AddCustomMiddleware();
-builder.Services.AddCustomAuthentication(builder.Configuration);
+builder.Services.AddCustomAuthentication(builder);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
