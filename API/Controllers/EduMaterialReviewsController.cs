@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Services.Models.DTOs.EduMaterialReview;
@@ -6,6 +7,7 @@ using Services.Services.Interfaces;
 
 namespace API.Controllers
 {
+   [Authorize]
    [Route("api/[controller]")]
    [ApiController]
    public class EduMaterialReviewsController : ControllerBase
@@ -29,9 +31,10 @@ namespace API.Controllers
       public async Task<IActionResult> CreateNewEduMaterial(EduMaterialReviewCreateDto eduMaterialReviewCreateDto)
       {
          var newEduMaterialReview = await _eduMaterialReviewService.CreateNewAsync(eduMaterialReviewCreateDto);
-         return CreatedAtRoute(nameof(GetSingleEduMaterialReview), new { id = newEduMaterialReview.EduMaterialId }, newEduMaterialReview);
+         return CreatedAtRoute(nameof(GetSingleEduMaterialReview), new { id = newEduMaterialReview.EduMaterialReviewId }, newEduMaterialReview);
       }
 
+      [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
       [HttpDelete("{id}")]
       public async Task<IActionResult> DeleteEduMaterialReview(int id)
       {

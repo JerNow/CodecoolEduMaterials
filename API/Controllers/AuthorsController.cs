@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Services.Services.Interfaces;
 
 namespace API.Controllers
 {
+   [Authorize]
    [Route("api/[controller]")]
    [ApiController]
    public class AuthorsController : ControllerBase
@@ -20,6 +23,7 @@ namespace API.Controllers
          return Ok(await _authorService.GetAll());
       }
 
+      [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
       [HttpGet("{AuthorName}/MaterialsWithReviewsAboveAverage")]
       public async Task<IActionResult> GetReviewsAboveAverage(string authorName)
       {

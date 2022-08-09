@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.JsonPatch;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Services.Models.DTOs.EduMaterial;
 using Services.Services.Interfaces;
 
 namespace API.Controllers
 {
+   [Authorize]
    [Route("api/[controller]")]
    [ApiController]
    public class EduMaterialsController : ControllerBase
@@ -23,7 +26,8 @@ namespace API.Controllers
       [HttpGet("{id}", Name = "GetSingleEduMaterial")]
       public async Task<IActionResult> GetSingleEduMaterial(int id) 
          => Ok(await _eduMaterialService.GetSingleAsync(em => em.EduMaterialId == id));
-      
+
+      [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
       [HttpPost]
       public async Task<IActionResult> CreateNewEduMaterial(EduMaterialCreateDto eduMaterialCreateDto)
       {
@@ -31,6 +35,7 @@ namespace API.Controllers
          return CreatedAtRoute(nameof(GetSingleEduMaterial), new { id = newEduMaterial.EduMaterialId }, newEduMaterial);
       }
 
+      [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
       [HttpDelete("{id}")]
       public async Task<IActionResult> DeleteEduMaterial(int id)
       {
@@ -38,13 +43,15 @@ namespace API.Controllers
          return NoContent();
       }
 
+      [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
       [HttpPut("{id}")]
       public async Task<IActionResult> PutEduMaterial(int id, EduMaterialUpdateDto eduMaterialUpdateDto)
       {
          await _eduMaterialService.PutAsync(em => em.EduMaterialId == id, eduMaterialUpdateDto);
          return NoContent();
       }
-      
+
+      [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
       [HttpPatch("{id}")]
       public async Task<IActionResult> PatchEduMaterial(int id, JsonPatchDocument eduMaterialPatch)
       {

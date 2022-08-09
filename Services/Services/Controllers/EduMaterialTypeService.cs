@@ -19,6 +19,12 @@ namespace Services.Services.Controllers
          _mapper = mapper;
       }
 
+      public async Task<List<EduMaterialTypeReadDto>> GetAllAsync()
+      {
+         var allEduMaterialTypes = await _unitOfWork.EduMaterialTypes.GetAllAsync();
+         return _mapper.Map<List<EduMaterialTypeReadDto>>(allEduMaterialTypes);
+      }
+
       public async Task<List<EduMaterialReadForReviewDto>> GetAllMaterialsFromTypeAsync(Expression<Func<EduMaterial, bool>> condition)
       {
          var eduMaterials = await _unitOfWork.EduMaterials.GetAllWithConditionAndWithIncludeAsync(condition, em => em.Author);
@@ -26,6 +32,12 @@ namespace Services.Services.Controllers
             throw new ArgumentNullException($"Educational Material Type not found");
 
          return _mapper.Map<List<EduMaterialReadForReviewDto>>(eduMaterials);
+      }
+
+      public async Task<EduMaterialTypeReadDto> GetSingleAsync(Expression<Func<EduMaterialType, bool>> condition)
+      {
+         var eduMaterialType = await _unitOfWork.EduMaterialTypes.GetSingleAsync(condition);
+         return _mapper.Map<EduMaterialTypeReadDto>(eduMaterialType);
       }
    }
 }
