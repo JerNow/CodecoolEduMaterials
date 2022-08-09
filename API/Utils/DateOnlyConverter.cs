@@ -19,8 +19,18 @@ namespace API.Utils
       public override DateOnly Read(ref Utf8JsonReader reader,
                               Type typeToConvert, JsonSerializerOptions options)
       {
-         var value = reader.GetString();
-         return DateOnly.Parse(value!);
+         reader.Read();
+         reader.Read();
+         var valueYear = reader.GetInt32();
+         reader.Read();
+         reader.Read();
+         var valueMonth = reader.GetInt32();
+         reader.Read();
+         reader.Read();
+         var valueDay = reader.GetInt32();
+         reader.Read();
+
+         return new DateOnly(valueYear, valueMonth, valueDay);
       }
 
       public override void Write(Utf8JsonWriter writer, DateOnly value,

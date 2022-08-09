@@ -29,5 +29,12 @@ namespace API.Controllers
          var newEduMaterial = await _eduMaterialService.CreateNewAsync(eduMaterialCreateDto);
          return CreatedAtRoute(nameof(GetSingleEduMaterial), new { id = newEduMaterial.EduMaterialId }, newEduMaterial);
       }
+
+      [HttpDelete("{id}")]
+      public async Task<IActionResult> DeleteEdumaterial(int id)
+      {
+         await _eduMaterialService.DeleteAsync(em => em.EduMaterialId == id);
+         return NoContent();
+      }
    }
 }

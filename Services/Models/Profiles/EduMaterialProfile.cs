@@ -9,6 +9,7 @@ namespace Services.Models.Profiles
       public EduMaterialProfile()
       {
          CreateMap<EduMaterial, EduMaterialReadDto>();
+         CreateMap<EduMaterialCreateDto, EduMaterial>();
       }
    }
 }

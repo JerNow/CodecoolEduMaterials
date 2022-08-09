@@ -32,10 +32,19 @@ namespace Services.Services.Controllers
       public async Task<EduMaterialReadDto> CreateNewAsync(EduMaterialCreateDto eduMaterialCreateDto)
       {
          var newEduMaterial = _mapper.Map<EduMaterial>(eduMaterialCreateDto);
-         _unitOfWork.EduMaterials.AddAsync(newEduMaterial);
-         await _unitOfWork.CompleUnitOfWorkAsync();
+         await _unitOfWork.EduMaterials.AddAsync(newEduMaterial);
+         await _unitOfWork.CompleteUnitOfWorkAsync();
          return _mapper.Map<EduMaterialReadDto>(newEduMaterial);
       }
 
+      public async Task DeleteAsync(Expression<Func<EduMaterial, bool>> condition)
+      {
+         var eduMaterialToDelete = await _unitOfWork.EduMaterials.GetSingleAsync(condition);
+         if (eduMaterialToDelete is null)
+            throw new ArgumentNullException($"Educational material not found");
+
+         await _unitOfWork.EduMaterials.DeleteAsync(eduMaterialToDelete);
+         await _unitOfWork.CompleteUnitOfWorkAsync();
+      }
    }
 }

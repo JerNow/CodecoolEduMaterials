@@ -10,6 +10,6 @@ namespace EduMaterialsDb.DAL
       IGenericRepository<EduMaterial> EduMaterials { get; }
       IGenericRepository<EduMaterialType> EduMaterialTypes { get; }
 
-      Task<int> CompleUnitOfWorkAsync();
+      Task<int> CompleteUnitOfWorkAsync();
    }
 }

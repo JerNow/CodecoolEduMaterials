@@ -21,7 +21,7 @@ namespace EduMaterialsDb.DAL
          EduMaterialReviews = new GenericRepository<EduMaterialReview>(_eduMaterialsDbContext);
       }
 
-      public async Task<int> CompleUnitOfWorkAsync()
+      public async Task<int> CompleteUnitOfWorkAsync()
          => await _eduMaterialsDbContext.SaveChangesAsync();
    }
 }
