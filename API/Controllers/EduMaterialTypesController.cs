@@ -13,7 +13,7 @@ namespace API.Controllers
       public EduMaterialTypesController(IEduMaterialTypeService eduMaterialTypeService)
           => _eduMaterialTypeService = eduMaterialTypeService;
 
-      [HttpGet("{Type}")]
+      [HttpGet("{typeName}")]
       public async Task<IActionResult> GetEpisodeAsync(string typeName)
           => Ok(await _eduMaterialTypeService.GetAllMaterialsFromTypeAsync(em => em.EduMaterialType.Name == typeName));
    }

@@ -48,7 +48,7 @@ namespace API.Controllers
       [HttpPatch("{id}")]
       public async Task<IActionResult> PatchEduMaterial(int id, JsonPatchDocument eduMaterialPatch)
       {
-         await _eduMaterialService.PutAsync(em => em.EduMaterialId == id, eduMaterialUpdateDto);
+         await _eduMaterialService.PatchAsync(em => em.EduMaterialId == id, eduMaterialPatch);
          return NoContent();
       }
    }

@@ -21,6 +21,7 @@ namespace API
          services.AddScoped<IAuthorService, AuthorService>();
          services.AddScoped<IEduMaterialService, EduMaterialService>();
          services.AddScoped<IEduMaterialTypeService, EduMaterialTypeService>();
+         services.AddScoped<IEduMaterialReviewService, EduMaterialReviewService>();
       }
    }
 }

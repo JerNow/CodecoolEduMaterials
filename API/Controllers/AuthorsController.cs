@@ -1,6 +1,4 @@
-﻿using EduMaterialsDb.DAL;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Services.Services.Interfaces;
 
 namespace API.Controllers

@@ -10,6 +10,8 @@ namespace Services.Models.Profiles
       {
          CreateMap<EduMaterial, EduMaterialReadDto>();
          CreateMap<EduMaterialCreateDto, EduMaterial>();
+         CreateMap<EduMaterialUpdateDto, EduMaterial>();
+         CreateMap<EduMaterial, EduMaterialReadForReviewDto>();
       }
    }
 }

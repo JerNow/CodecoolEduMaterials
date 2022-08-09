@@ -16,6 +16,7 @@ namespace EduMaterialsDb.DAL.Repository
       Task<List<T>> GetAllWithIncludeAsync(Expression<Func<T, object>> criteria);
       Task<List<T>> GetAllWithIncludeAndIncludeAsync(Expression<Func<T, object>> criteriaIncludeFirst, Expression<Func<T, object>> criteriaIncludeSecond);
       Task<List<T>> GetAllWithIncludeAndIncludeAndIncludeAsync(Expression<Func<T, object>> criteriaIncludeFirst, Expression<Func<T, object>> criteriaIncludeSecond, Expression<Func<T, object>> criteriaIncludeThird);
+      Task<List<T>> GetAllWithConditionAndWithIncludeAsync(Expression<Func<T, bool>> condition, Expression<Func<T, object>> criteria);
       #endregion
 
       #region SYNC

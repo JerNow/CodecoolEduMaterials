@@ -8,7 +8,10 @@ namespace Services.Models.Profiles
    {
       public EduMaterialReviewProfile()
       {
-         CreateMap<EduMaterialReview, EduMaterialReviewReadForListDto>();
+         CreateMap<EduMaterialReview, EduMaterialReviewReadForListDto>(); 
+         CreateMap<EduMaterialReview, EduMaterialReviewReadDto>(); 
+         CreateMap<EduMaterialReviewCreateDto, EduMaterialReview>();
+         CreateMap<EduMaterialReviewUpdateDto, EduMaterialReview>();
       }
    }
 }

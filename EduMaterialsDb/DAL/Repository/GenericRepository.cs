@@ -62,7 +62,7 @@ namespace EduMaterialsDb.DAL.Repository
 
       public async Task<T> GetSingleWithIncludeAsync(Expression<Func<T, bool>> condition, Expression<Func<T, object>> criteria)
          => await _dbSet.Where(condition).Include(criteria).FirstOrDefaultAsync();
-      
+
       public async Task<T> GetSingleWithIncludeAndIncludeAsync(
          Expression<Func<T, bool>> condition,
          Expression<Func<T, object>> criteriaIncludeFirst, 
@@ -82,6 +82,9 @@ namespace EduMaterialsDb.DAL.Repository
                            .Include(criteriaIncludeSecond)
                            .Include(criteriaIncludeThird)
                           .FirstOrDefaultAsync();
+
+      public async Task<List<T>> GetAllWithConditionAndWithIncludeAsync(Expression<Func<T, bool>> condition, Expression<Func<T, object>> criteria)
+         => await _dbSet.Where(condition).Include(criteria).ToListAsync();
       #endregion
 
       #region SYNC

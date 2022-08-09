@@ -21,7 +21,10 @@ namespace Services.Services.Controllers
 
       public async Task<List<EduMaterialReadForReviewDto>> GetAllMaterialsFromTypeAsync(Expression<Func<EduMaterial, bool>> condition)
       {
-         var eduMaterials = await _unitOfWork.EduMaterials.GetSingleWithIncludeAsync(condition, em => em.EduMaterialType);
+         var eduMaterials = await _unitOfWork.EduMaterials.GetAllWithConditionAndWithIncludeAsync(condition, em => em.Author);
+         if(eduMaterials is null)
+            throw new ArgumentNullException($"Educational Material Type not found");
+
          return _mapper.Map<List<EduMaterialReadForReviewDto>>(eduMaterials);
       }
    }

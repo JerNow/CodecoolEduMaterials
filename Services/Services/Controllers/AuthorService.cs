@@ -27,16 +27,18 @@ namespace Services.Services.Controllers
 
       public async Task<List<EduMaterialReadForReviewDto>> GetReviewsAboveAverageFromAuthor(Expression<Func<Author, bool>> condition)
       {
-         var author = await _unitOfWork.Authors.GetSingleWithIncludeAsync(condition, a => a.EduMaterials.Select(em => em.EduMaterialReviews.Select(emr => emr.ReviewScore).ToList()).ToList());
-         if (author is null)
-            throw new ArgumentNullException($"Author not found");
+         throw new NotImplementedException();
+         //var author = await _unitOfWork.Authors.GetSingleWithIncludeAsync(condition, a => a.EduMaterials.Select(em => em.EduMaterialReviews.Select(emr => emr.ReviewScore).ToList()).ToList());
+         //var author = await _unitOfWork.Authors.GetSingleWithIncludeAndIncludeAndIncludeAsync(condition, a => a.EduMaterials, a => a.EduMaterials.Select(em => em.EduMaterialReviews).ToList(), a => a.EduMaterials.Select(em => em.EduMaterialReviews.Select(emr => emr.ReviewScore).ToList()).ToList());
+         //if (author is null)
+         //   throw new ArgumentNullException($"Author not found");
 
-         var aboveAverageMaterialList = new List<EduMaterialReadForReviewDto>();
-         foreach(EduMaterial eduMaterial in author.EduMaterials)
-         {
-            AddOnlyAboveAverageMaterialToList(aboveAverageMaterialList, eduMaterial);//
-         }
-         return aboveAverageMaterialList;
+         //var aboveAverageMaterialList = new List<EduMaterialReadForReviewDto>();
+         //foreach(EduMaterial eduMaterial in author.EduMaterials)
+         //{
+         //   AddOnlyAboveAverageMaterialToList(aboveAverageMaterialList, eduMaterial);//
+         //}
+         //return aboveAverageMaterialList;
       }
 
       private void AddOnlyAboveAverageMaterialToList(List<EduMaterialReadForReviewDto> aboveAverageMaterialList, EduMaterial eduMaterial)
