@@ -85,7 +85,7 @@ namespace Services.Services.Controllers
       {
          var jwtTokenHandler = new JwtSecurityTokenHandler();
 
-         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
+         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtKey"]));
 
          var claims = await GetValidClaims(user);
 
