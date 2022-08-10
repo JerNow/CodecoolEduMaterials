@@ -1,0 +1,9 @@
+{
+  "email": "admin@admin.com",
+  "password": "Passw0rd!@#"
+}
+
+{
+  "email": "user@example.com",
+  "password": "Passw0rd!@#"
+}
