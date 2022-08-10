@@ -1,4 +1,5 @@
-﻿using AuthDb.Context;
+﻿using API.Middleware;
+using AuthDb.Context;
 using EduMaterialsDb.Context;
 using EduMaterialsDb.DAL;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -59,6 +60,7 @@ namespace API
 
       public static void AddCustomMiddleware(this IServiceCollection services)
       {
+         services.AddScoped<LogHandlerMiddleware>();
          services.AddIdentityCore<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                            .AddRoles<IdentityRole>()
                            .AddEntityFrameworkStores<AuthDbContext>();
